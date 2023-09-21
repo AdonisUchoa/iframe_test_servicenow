@@ -37,8 +37,8 @@
                 primaryColor: '#000',
                 hoverColor: '#EFEFEF',
                 activeColor: '#AAA',
-                openIcon: 'https://opentec.com.br/wp-content/uploads/2022/05/logo-open-tec.png',
-                closeIcon: 'https://opentec.com.br/wp-content/uploads/2022/05/logo-open-tec.png',
+                openIcon: 'custom-open.svg',
+                closeIcon: 'custom-close.svg',
                 sizeMultiplier: 1.6
             },
             offsetX: 50,
@@ -48,6 +48,21 @@
                 'Open dialog': 'Open chat',
                 'Open Chat. {0} unread message(s)': 'Click to open',
                 'Close chat.': 'Click to close'
+            }
+        });
+
+        // Add event listener for session events
+        window.addEventListener("message", function(e) {
+            // Check if it's a SESSION_CREATED event and the user is unauthenticated
+            if (e.data.type === "SESSION_CREATED" && e.data.authenticated === false) {
+                // Redirect to SSO login with the specified redirect URI
+                window.location.href = "https://openteccomputaosistemasltdademo4.service-now.com/sn_va_web_client_login.do?sysparm_redirect_uri=" + encodeURIComponent(window.location.href);
+            }
+
+            // Check if it's a SESSION_LOGGED_OUT event
+            if (e.data.type === "SESSION_LOGGED_OUT") {
+                // Redirect to SSO login with the specified redirect URI
+                window.location.href = "https://openteccomputaosistemasltdademo4.service-now.com/sn_va_web_client_login.do?sysparm_redirect_uri=" + encodeURIComponent(window.location.href);
             }
         });
     </script>
