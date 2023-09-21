@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,6 +17,7 @@
             border: none;
         }
     </style>
+    <script src="https://openteccomputaosistemasltdademo4.service-now.com/scripts/now-requestor-chat-popover-app/now-requestor-chat-popover-app.min.js?sysparm_substitute=false"></script>
 </head>
 <body>
     <iframe id="sn_va_web_client"
@@ -24,6 +26,30 @@
         loading="lazy">
     </iframe>
 
-    <script src="https://openteccomputaosistemasltdademo4.service-now.com/scripts/now-requestor-chat-popover-app/now-requestor-chat-popover-app.min.js?sysparm_substitute=false"></script>
+    <script>
+        const chat = new ServiceNowChat({
+            instance: 'https://openteccomputaosistemasltdademo4.service-now.com',
+            context: {
+                skip_load_history: 1
+            },
+            branding: {
+                bgColor: '#333',
+                primaryColor: '#000',
+                hoverColor: '#EFEFEF',
+                activeColor: '#AAA',
+                openIcon: 'custom-open.svg',
+                closeIcon: 'custom-close.svg',
+                sizeMultiplier: 1.6
+            },
+            offsetX: 50,
+            offsetY: 50,
+            position: 'left',
+            translations: {
+                'Open dialog': 'Open chat',
+                'Open Chat. {0} unread message(s)': 'Click to open',
+                'Close chat.': 'Click to close'
+            }
+        });
+    </script>
 </body>
 </html>
