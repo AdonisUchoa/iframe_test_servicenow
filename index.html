@@ -55,14 +55,14 @@
         window.addEventListener("message", function(e) {
             // Check if it's a SESSION_CREATED event and the user is unauthenticated
             if (e.data.type === "SESSION_CREATED" && e.data.authenticated === false) {
-                // Redirect to SSO login with the specified redirect URI
-                window.location.href = "https://openteccomputaosistemasltdademo4.service-now.com/sn_va_web_client_login.do?sysparm_redirect_uri=" + encodeURIComponent(window.location.href);
+                // Post a message to the parent window with the redirect URL
+                window.parent.postMessage({ redirectUrl: "https://openteccomputaosistemasltdademo4.service-now.com/sn_va_web_client_login.do?sysparm_redirect_uri=" + encodeURIComponent(window.location.href) }, "*");
             }
 
             // Check if it's a SESSION_LOGGED_OUT event
             if (e.data.type === "SESSION_LOGGED_OUT") {
-                // Redirect to SSO login with the specified redirect URI
-                window.location.href = "https://openteccomputaosistemasltdademo4.service-now.com/sn_va_web_client_login.do?sysparm_redirect_uri=" + encodeURIComponent(window.location.href);
+                // Post a message to the parent window with the redirect URL
+                window.parent.postMessage({ redirectUrl: "https://openteccomputaosistemasltdademo4.service-now.com/sn_va_web_client_login.do?sysparm_redirect_uri=" + encodeURIComponent(window.location.href) }, "*");
             }
         });
     </script>
